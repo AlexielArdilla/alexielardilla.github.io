@@ -50,16 +50,12 @@
             @apply px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-slate-800 hover:text-white transition-colors;
         }
 
-        /* --- CAMBIO AQUÍ: Estilos para la imagen de fondo del Hero --- */
-        /* Estilos para la sección Hero */
+        /* --- Estilos para la imagen de fondo del Hero --- */
         #hero {
             position: relative;
-            /* Necesario para los pseudo-elementos */
             overflow: hidden;
-            /* Asegura que el blur no se salga */
         }
 
-        /* Este es el pseudo-elemento que contiene la imagen de fondo desenfocada */
         #hero::before {
             content: '';
             position: absolute;
@@ -67,13 +63,11 @@
             right: -5%;
             bottom: -5%;
             left: -5%;
-            /* Evita bordes por el blur */
             background: url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             filter: blur(5px);
             z-index: -2;
         }
 
-        /* Este es el pseudo-elemento que crea la capa oscura sobre la imagen */
         #hero::after {
             content: '';
             position: absolute;
@@ -82,11 +76,8 @@
             right: 0;
             bottom: 0;
             background-color: rgba(10, 10, 10, 0.7);
-            /* Capa oscura semitransparente */
             z-index: -1;
         }
-
-        /* --- FIN DEL CAMBIO --- */
 
         /* Estilo para la barra de scroll */
         ::-webkit-scrollbar {
@@ -114,9 +105,7 @@
             height: 0;
             overflow: hidden;
             border-radius: 0.5rem;
-            /* rounded-lg */
             background-color: #000;
-            /* Fondo negro mientras carga el video */
         }
 
         .video-container iframe {
@@ -132,7 +121,6 @@
             overflow-x: auto;
             max-width: 100%;
             word-wrap: break-word;
-            -webkit-overflow-scrolling: touch;
         }
 
         #markdown-display pre {
@@ -155,6 +143,27 @@
             overflow-x: auto;
             display: block;
         }
+
+        /* Estilos para la sección de Pet Projects */
+        .project-card {
+            @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:border-sky-500 hover:shadow-sky-500/10 hover:-translate-y-2;
+        }
+
+        .project-card .work-content {
+            @apply p-6;
+        }
+
+        .project-card .work-img {
+            @apply relative;
+        }
+
+        .project-card .work-img img {
+            @apply transition-transform duration-500;
+        }
+
+        .project-card:hover .work-img img {
+            @apply transform scale-110;
+        }
     </style>
 </head>
 
@@ -164,14 +173,14 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-lg border-b border-slate-800">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-white">Alejandro G Vera</a>
-            <!-- CAMBIO AQUÍ: Aumentado el espacio entre elementos de 'space-x-2' a 'space-x-4' -->
             <nav class="hidden md:flex items-center space-x-4">
                 <a href="#about" class="nav-link">Sobre mí</a>
                 <a href="#experience" class="nav-link">Trayectoria</a>
+                <a href="#cursos" class="nav-link">Cursos</a>
                 <a href="#portfolio" class="nav-link">Videos/code</a>
+                <a href="#pet-projects" class="nav-link">Pet Projects</a>
                 <a href="#skills" class="nav-link">Habilidades</a>
                 <a href="#books" class="nav-link">Books</a>
-                <!-- CAMBIO AQUÍ: Aumentado el padding horizontal de 'px-4' a 'px-6' para darle más espacio -->
                 <a href="#contact" class="nav-link bg-sky-600 text-white hover:bg-sky-500 px-6">Contacto</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-white">
@@ -182,7 +191,9 @@
         <div id="mobile-menu" class="hidden md:hidden bg-slate-900">
             <a href="#about" class="block py-2 px-4 text-sm hover:bg-slate-800">Sobre mí</a>
             <a href="#experience" class="block py-2 px-4 text-sm hover:bg-slate-800">Trayectoria</a>
+            <a href="#cursos" class="block py-2 px-4 text-sm hover:bg-slate-800">Cursos</a>
             <a href="#portfolio" class="block py-2 px-4 text-sm hover:bg-slate-800">Portafolio</a>
+            <a href="#pet-projects" class="block py-2 px-4 text-sm hover:bg-slate-800">Pet Projects</a>
             <a href="#skills" class="block py-2 px-4 text-sm hover:bg-slate-800">Habilidades</a>
             <a href="#books" class="block py-2 px-4 text-sm hover:bg-slate-800">Books</a>
             <a href="#contact" class="block py-2 px-4 text-sm hover:bg-slate-800">Contacto</a>
@@ -393,12 +404,256 @@
                 </div>
             </div>
         </section>
-        <!-- CAMBIO AQUÍ: Nueva sección para el botón de LinkedIn -->
+
+        <!-- ================================================================= -->
+        <!-- ================== SECCIÓN DE CURSOS ============================ -->
+        <!-- ================================================================= -->
+        <section id="cursos" class="py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title" style="text-align: center;">Cursos y Diplomas</h2><br><br>
+                <p class="text-center text-gray-400 max-w-2xl mx-auto -mt-8 mb-16">
+                    Estos son algunos de mis certificados y diplomas más relevantes relacionados al mundo del Ethical
+                    hacking y la programación
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Diploma Card 1 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/cert1_google-cybersecurity.jpg" class="block mt-2">
+                                <img class="h-auto w-full object-cover" src="images/cert1_google-cybersecurity.jpg"
+                                    alt="Imagen de diploma de google ciberseguridad">
+                            </a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    Google (Coursera)
+                                </p>
+                                <a href="images/cert1_google-cybersecurity.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">Ciberseguridad Google</p>
+                                    <p class="mt-3 text-base text-gray-400">Certificación que valida el conocimiento de
+                                        directrices y tareas comunes en el ámbito de la ciberseguridad.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2019">2019</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Card 2 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/cert2_desarrollador_web_full_stack.jpg" class="block mt-2">
+                                <img class="h-auto w-full object-cover"
+                                    src="images/cert2_desarrollador_web_full_stack.jpg"
+                                    alt="Imagen de diploma desarrollador full stack">
+                            </a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    LinkedIn Learning
+                                </p>
+                                <a href="images/cert2_desarrollador_web_full_stack.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">Desarrollador Web FullStack</p>
+                                    <p class="mt-3 text-base text-gray-400">Itinerario de formación completo cubriendo
+                                        tecnologías de frontend y backend para el desarrollo de aplicaciones web
+                                        modernas.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2020">2020</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Card 3 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/cert3_codecademy_comando.jpg" class="block mt-2">
+                                <img class="h-auto w-full object-cover" src="images/cert3_codecademy_comando.jpg"
+                                    alt="Imagen de diploma linea de comandos linux">
+                            </a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    Codecademy
+                                </p>
+                                <a href="images/cert3_codecademy_comando.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">Aprende la Línea de Comandos</p>
+                                    <p class="mt-3 text-base text-gray-400">Curso intensivo sobre el uso de la terminal
+                                        en entornos Unix/Linux, una habilidad esencial para cualquier desarrollador.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2015">2015</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Card 4 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/cert4_Experto_e_hacking_page-0001.jpg" class="block mt-2">
+                                <img class="h-auto w-full object-cover" src="images/cert4_Experto_e_hacking_page-0001.jpg"
+                                    alt="Imagen de diploma experto en ethical hacking">
+                            </a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    UTN
+                                </p>
+                                <a href="images/cert4_Experto_e_hacking_page-0001.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">Experto Universitario en Ethical Hacking
+                                    </p>
+                                    <p class="mt-3 text-base text-gray-400">Aprendizaje profundo de técnicas avanzadas
+                                        de Hacking Éico blue y red team.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2020">2023</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Card 5 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/Cert5_ CIBERSEGURIDAD Y SEGURIDAD DE LA INFORMACIÓN_page-0001.jpg" class="block mt-2">
+                            <img class="h-auto w-full object-cover"
+                                src="images/Cert5_ CIBERSEGURIDAD Y SEGURIDAD DE LA INFORMACIÓN_page-0001.jpg"
+                                alt="Imagen de diploma de ejemplo"></a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    Edutin
+                                </p>
+                                <a href="images/Cert5_ CIBERSEGURIDAD Y SEGURIDAD DE LA INFORMACIÓN_page-0001.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">CIBERSEGURIDAD Y SEGURIDAD DE LA
+                                        INFORMACIÓN</p>
+                                    <p class="mt-3 text-base text-gray-400">Técnicas y herramientas para la gestión del
+                                        acceso y la monitorización a nivel empresarial redes
+                                        empresariales.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2020">2024</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Card 6 -->
+                    <div
+                        class="card flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 backdrop-blur-sm border border-slate-800 rounded-xl p-6 shadow-lg">
+                        <div class="flex-shrink-0">
+                            <a href="images/Cert6_Python intermedio UTN_page-0001.jpg" class="block mt-2"></a>
+                            <img class="h-auto w-full object-cover"
+                                src="images/Cert6_Python intermedio UTN_page-0001.jpg"
+                                alt="Imagen de diploma Python 3"></a>
+                        </div>
+                        <div class="flex-1 p-6 flex flex-col justify-between">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-sky-400">
+                                    Min. de Producción
+                                </p>
+                                <a href="images/Cert6_Python intermedio UTN_page-0001.jpg" class="block mt-2">
+                                    <p class="text-xl font-semibold text-white">Python 3 - Intermedio</p>
+                                    <p class="mt-3 text-base text-gray-400">Programación de software en Python nivel intermedio en aplicaciones de scripting y web.</p>
+                                </a>
+                            </div>
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <span class="sr-only">Alejandro G. Vera</span>
+                                    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-white">
+                                        Alejandro G. Vera
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <time datetime="2017">2023</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón de LinkedIn -->
         <section class="py-16 bg-black/20">
             <div class="container mx-auto px-6 text-center">
-                <h3 class="text-2xl font-semibold text-white mb-4">¿Interesado en saber más de mi experiencia?</h3>
+                <h3 class="text-2xl font-semibold text-white mb-4">¿Interesado en ver todos mis diplomas?</h3>
                 <p class="text-gray-400 max-w-xl mx-auto mb-8">
-                    Mira mi perfil de LinkedIn, allí enontrarás toda mi información laboral detallada.
+                    Mira mi perfil de LinkedIn, allí encontrarás toda mi información detallada.
                 </p>
                 <a href="https://www.linkedin.com/in/alejandro-gonzalo-vera/" target="_blank" rel="noopener noreferrer"
                     class="inline-block text-white font-bold text-lg py-4 px-10 rounded-full
@@ -410,12 +665,12 @@
                 </a>
             </div>
         </section>
-        <!-- FIN DEL CAMBIO -->
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="py-24">
             <div class="container mx-auto px-6">
-                <h2 class="section-title" style="text-align: center;"><b>Algunos videos y código:</b></h2>
+                <h2 class="section-title" style="text-align: center;"><b>Algunos videos de mis cursos y código de
+                        ejemplo:</b></h2>
 
                 <!-- Tabs -->
                 <div class="flex justify-center mb-12 border-b border-slate-800">
@@ -583,10 +838,165 @@
             </div>
         </section>
 
-        <!-- CAMBIO AQUÍ: Nueva sección para el botón de GitHub -->
+        <!-- ================================================================= -->
+        <!-- ================== NUEVA SECCIÓN DE PET PROJECTS ================ -->
+        <!-- ================================================================= -->
+        <section id="pet-projects" class="py-24 bg-slate-900/40">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title" style="text-align: center;">Proyectos favoritos</h2><br><br>
+                <p class="text-center text-gray-400 max-w-2xl mx-auto -mt-8 mb-16">
+                    Una selección de mis proyectos personales favoritos donde aplico y experimento con diversas
+                    tecnologías. Cada uno tiene un enlace a su repositorio en GitHub.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Project Card 1 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/ProyectoRecruiter2050" target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-1.jpg"
+                                    alt="Imagen del proyecto Recruiter 2050" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">Recruiter 2050</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Abril 2018</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/Gestor-Web-Aerolineas-UNPAZ" target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-2.jpg"
+                                    alt="Imagen del proyecto Aerolineas UNPAZ" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">Aerolineas UNPAZ</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Sept. 2018</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/ABM-Alumnos-con-seleccion-de-avatares"
+                            target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-3.jpg"
+                                    alt="Imagen del proyecto ABM Alumnos" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">ABM Alumnos</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Enero 2019</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Project Card 4 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/Preatendedor_pgsql" target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-4.jpg"
+                                    alt="Imagen del proyecto Preatendedor" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">Preatendedor</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Feb. 2019</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Project Card 5 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/GestionDePreatendidos_postgresql" target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-5.jpg"
+                                    alt="Imagen del proyecto Gestor Preatendedor" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">Gestor Preatendedor</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Feb. 2019</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Project Card 6 -->
+                    <div class="project-card">
+                        <a href="https://github.com/AlexielArdilla/Proyecto-Horarios-y-Desktop-App-Java-Web"
+                            target="_blank">
+                            <div class="work-img overflow-hidden">
+                                <img src="images/work-6.jpg"
+                                    alt="Imagen del proyecto Horarios UNPAZ" class="w-full h-auto">
+                            </div>
+                            <div class="work-content">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-white">Horarios UNPAZ</h3>
+                                        <div class="text-sm text-gray-400 mt-1">
+                                            <span class="text-sky-400">Ver en GitHub</span> / <span>Abril 2018</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl text-sky-400">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón de GitHub -->
         <section class="py-16 bg-black/20">
             <div class="container mx-auto px-6 text-center">
-                <h3 class="text-2xl font-semibold text-white mb-4">¿Interesado en ver mis proyectos?</h3>
+                <h3 class="text-2xl font-semibold text-white mb-4">¿Interesado en ver todos mis proyectos?</h3>
                 <p class="text-gray-400 max-w-xl mx-auto mb-8">
                     Explora todos mis repositorios, contribuciones y proyectos personales directamente en mi perfil de
                     GitHub.
@@ -600,7 +1010,6 @@
                 </a>
             </div>
         </section>
-        <!-- FIN DEL CAMBIO -->
 
         <!-- Author / Books Section -->
         <section id="books" class="py-20 md:py-32 bg-gray-900">
@@ -609,14 +1018,15 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-white">Creación de contenido de calidad</h2>
                     <div class="w-24 h-1 bg-amber-500 mx-auto mt-4 mb-8"></div>
                     <p class="text-lg text-gray-400 max-w-3xl mx-auto">Desde Linux puro pasando por tools hasta Ethical
-                        Hacking con Kali, cada libro es un despliegue de creatividad y experiencia (<b>Links de Amazon en cada portada</b>).</p>
+                        Hacking con Kali, cada libro es un despliegue de creatividad y experiencia (<b>Links de Amazon
+                            en cada portada</b>).</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Book Card 1 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/iCwOvpS"
-                            target="_blank"><img src="images/001- La Biblia de Linux Ethical Hacking.jpg"
+                        <a href="https://a.co/d/iCwOvpS" target="_blank"><img
+                                src="images/001- La Biblia de Linux Ethical Hacking.jpg"
                                 alt="La biblia de linux Ethical hacking" class="w-full h-auto object-cover"></a>
                         <div class="p-6">
                             <h4 class="font-bold text-white text-lg">Linux Ethical Hacking</h4>
@@ -696,8 +1106,8 @@
                     </div>
                     <!-- Book Card 8 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/2hRDfom"
-                            target="_blank"><img src="images/008- theHarvester_ Uso Avanzado en Kali.jpg"
+                        <a href="https://a.co/d/2hRDfom" target="_blank"><img
+                                src="images/008- theHarvester_ Uso Avanzado en Kali.jpg"
                                 alt="Portada del libro El arte de la palabra" class="w-full h-auto object-cover"></a>
                         <div class="p-6">
                             <h4 class="font-bold text-white text-lg">The harvester</h4>
@@ -709,7 +1119,7 @@
         </section>
 
         <!-- Author / Books Section 3 -->
-        <section id="author2" class="py-20 md:py-32 bg-gray-900">
+        <section id="author3" class="py-20 md:py-32 bg-gray-900">
             <div class="container mx-auto px-6">
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -725,8 +1135,7 @@
                     </div>
                     <!-- Book Card 10 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/5mU9XT6"
-                            target="_blank"><img
+                        <a href="https://a.co/d/5mU9XT6" target="_blank"><img
                                 src="images/010- Domina Microsoft Word (Guía No Oficial) - Alejandro G Vera-1_PORTADA.jpg"
                                 alt="Portada del Libro Textos herméticos" class="w-full h-auto object-cover"></a>
                         <div class="p-6">
@@ -736,8 +1145,7 @@
                     </div>
                     <!-- Book Card 11 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/hklqSPy"
-                            target="_blank"><img
+                        <a href="https://a.co/d/hklqSPy" target="_blank"><img
                                 src="images/011- Guía Exhaustiva de Formación en Java para Trainees Alejandro G Vera-1_PORTADA.jpg"
                                 alt="Portada del libro Guía integral de Ethical hacking"
                                 class="w-full h-auto object-cover"></a>
@@ -759,8 +1167,8 @@
                 </div>
             </div>
         </section>
-        <!-- Author / Books Section 9 -->
-        <section id="author2" class="py-20 md:py-32 bg-gray-900">
+        <!-- Author / Books Section 4 -->
+        <section id="author4" class="py-20 md:py-32 bg-gray-900">
             <div class="container mx-auto px-6">
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -786,8 +1194,7 @@
                     </div>
                     <!-- Book Card 15 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/5dwnZ8y"
-                            target="_blank"><img
+                        <a href="https://a.co/d/5dwnZ8y" target="_blank"><img
                                 src="images/015- Patrones de Arquitectura de Software en Java - Una Guía Práctica A G V-1_PORTADA.jpg"
                                 alt="Portada del libro Guía integral de Ethical hacking"
                                 class="w-full h-auto object-cover"></a>
@@ -798,8 +1205,7 @@
                     </div>
                     <!-- Book Card 16 -->
                     <div class="book-card bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://a.co/d/7uZJS05"
-                            target="_blank"><img
+                        <a href="https://a.co/d/7uZJS05" target="_blank"><img
                                 src="images/016- Ubuntu - Un Análisis Exhaustivo de un Sistema Operativo de Código Abierto de Primera Línea A G V-1_PORTADA.jpg"
                                 alt="Portada del libro El arte de la palabra" class="w-full h-auto object-cover"></a>
                         <div class="p-6">
