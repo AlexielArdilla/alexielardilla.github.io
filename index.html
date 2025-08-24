@@ -1008,14 +1008,58 @@
                     GitHub.
                 </p>
                 <a href="https://github.com/AlexielArdilla" target="_blank" rel="noopener noreferrer" class="inline-block text-white font-bold text-lg py-4 px-10 rounded-full
-                          bg-gradient-to-r from-sky-600 to-cyan-500 
-                          hover:from-sky-500 hover:to-cyan-400 
-                          transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/50">
+                          bg-gradient-to-r from-slate-800 to-slate-700
+                          hover:from-slate-700 hover:to-slate-600 
+                          transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-slate-500/50">
                     <i class="fab fa-github mr-3"></i>
                     Visitar mi GitHub
                 </a>
             </div>
         </section>
+
+        <!-- ================================================================= -->
+        <!-- ================== NUEVA SECCIÓN DE CONTADORES ================== -->
+        <!-- ================================================================= -->
+        <section class="relative py-24 bg-cover bg-center bg-fixed" style="background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-sky-900/70 backdrop-blur-sm"></div>
+            <div class="container mx-auto px-6 relative">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Contador 1: Libros -->
+                    <div class="flex flex-col items-center text-white p-4">
+                        <div class="mb-4 flex items-center justify-center w-24 h-24 rounded-full border-4 border-sky-400/50 bg-slate-900/30">
+                            <i class="fas fa-book fa-3x text-sky-300"></i>
+                        </div>
+                        <p class="counter text-5xl font-extrabold">62</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Libros Publicados</p>
+                    </div>
+                    <!-- Contador 2: Alumnos -->
+                    <div class="flex flex-col items-center text-white p-4">
+                        <div class="mb-4 flex items-center justify-center w-24 h-24 rounded-full border-4 border-sky-400/50 bg-slate-900/30">
+                            <i class="fas fa-users fa-3x text-sky-300"></i>
+                        </div>
+                        <p class="counter text-5xl font-extrabold">57.000</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Alumnos en Udemy</p>
+                    </div>
+                    <!-- Contador 3: Proyectos -->
+                    <div class="flex flex-col items-center text-white p-4">
+                        <div class="mb-4 flex items-center justify-center w-24 h-24 rounded-full border-4 border-sky-400/50 bg-slate-900/30">
+                            <i class="fab fa-github fa-3x text-sky-300"></i>
+                        </div>
+                        <p class="counter text-5xl font-extrabold">102</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Proyectos en GitHub</p>
+                    </div>
+                    <!-- Contador 4: Seguidores -->
+                    <div class="flex flex-col items-center text-white p-4">
+                        <div class="mb-4 flex items-center justify-center w-24 h-24 rounded-full border-4 border-sky-400/50 bg-slate-900/30">
+                            <i class="fab fa-linkedin fa-3x text-sky-300"></i>
+                        </div>
+                        <p class="counter text-5xl font-extrabold">8700</p>
+                        <p class="mt-2 text-lg font-medium text-gray-200">Seguidores en LinkedIn</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Author / Books Section -->
         <section id="books" class="py-20 md:py-32 bg-gray-900">
@@ -1254,6 +1298,11 @@
             </div>
         </footer>
     </main>
+
+    <!-- JavaScript Libraries for Counter -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
 
     <script>
         // --- Mobile Menu Toggle ---
@@ -1519,6 +1568,15 @@ public class GestorConsultas {
                 }
             });
         }
+
+        // --- Counter-Up Initialization ---
+        $(document).ready(function(){
+            $('.counter').counterUp({
+                delay: 10,
+                time: 1500
+            });
+        });
+
 
         // Cargar el primer proyecto por defecto
         document.addEventListener('DOMContentLoaded', () => {
