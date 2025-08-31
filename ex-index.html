@@ -50,10 +50,10 @@
             @apply px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-slate-800 hover:text-white transition-colors;
         }
 
-        /* --- Estilos para la imagen de fondo del Hero 
+        /* --- Estilos para la imagen de fondo del Hero --- */
         #hero {
             position: relative;
-            overflow: visible;
+            overflow: hidden;
         }
 
         #hero::before {
@@ -63,25 +63,6 @@
             right: -5%;
             bottom: -5%;
             left: -5%;
-            background: url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            filter: blur(5px);
-            z-index: -2;
-        } ---*/
-
-        /* Después */
-        #hero {
-            position: relative;
-            overflow-x: hidden;
-            /* evita scroll horizontal */
-            overflow-y: visible;
-            /* deja crecer verticalmente el contenido */
-        }
-
-        #hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            /* sin sangrado: nada de -5% */
             background: url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             filter: blur(5px);
             z-index: -2;
@@ -271,7 +252,7 @@
     <main class="pt-20">
         <!-- Hero Section -->
         <section id="hero"
-            class="min-h-[calc(100dvh-80px)] md:min-h-[calc(100vh-80px)] flex items-center justify-center text-center bg-grid-slate-800/[0.2]">
+            class="h-[calc(100vh-80px)] flex items-center justify-center text-center bg-grid-slate-800/[0.2]">
             <div class="container mx-auto px-6">
                 <h1 class="text-5xl md:text-7xl font-black mb-4 text-white leading-tight">
                     Creador de contenido <br />& <span class="accent-color">Instructor en Ethical Hacking</span>
@@ -281,7 +262,7 @@
                     ecosistema IT y comunidad de Hacking.
                 </p>
                 <a href="#portfolio"
-                    class="bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-500 transition-transform duration-300 inline-block hover:scale-105 text-center break-words">
+                    class="bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-500 transition-transform duration-300 inline-block hover:scale-105">
                     Algunos videos de mis capacitaciones
                 </a>
                 <br>
@@ -484,7 +465,7 @@
                         <div class="md:w-1/2"></div>
                         <div class="md:w-1/2">
                             <div class="card">
-                                <p class="text-sky-400 font-semibold">2020 - 2021</p>
+                                <p class="text-sky-400 font-semibold">Septiembre 2020 - Septiembre 2021</p>
                                 <h3 class="text-xl font-bold text-white mt-1">Programador Web
                                 </h3>
                                 <p class="text-gray-400 font-medium">Freelance</p>
